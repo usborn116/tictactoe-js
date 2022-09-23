@@ -46,23 +46,12 @@ let formHandler = (() => {
     function removeBlur() {
       document.getElementById("blurred-header").id = "header";
     }
-  
-    function coinFlip() {
-      let number = Math.floor(Math.random() * 2);
-  
-      if (number === 0) {
-        gameFlow.moveCount = 0;
-      } else {
-        gameFlow.moveCount = 1;
-        computer.randomCorner();
-      }
-    }
+
   
     form.addEventListener("submit", handleForm);
     form.addEventListener("submit", getPlayers);
     form.addEventListener("submit", showScore);
     form.addEventListener("submit", removeBlur);
-    form.addEventListener("submit", coinFlip);
   
     return {
       showScore,
@@ -74,12 +63,10 @@ let formHandler = (() => {
 let Player = (name) => {
     let playerMoves = [];
     let winCount = 0;
-    let isBot = false;
     return {
       name,
       playerMoves,
       winCount,
-      isBot,
     };
   };
 
@@ -130,10 +117,6 @@ let eventListeners = (() => {
         } else if (gameFlow.hasWon === true) {
           this.innerHTML = "";
           gameFlow.hasWon = false;
-        }
-  
-        if (computer.isComputerTurn()) {
-          computer.makeMove();
         }
       });
     });
